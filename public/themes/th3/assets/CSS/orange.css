@@ -1,0 +1,95 @@
+
+
+.swiper-navBtn {
+  padding: 10px;
+  margin: 10px;
+  background-color: #ff5722 !important; 
+  transition: color 0.3s ease;
+}
+
+.colorVoilet,
+.text-megenta,
+.holder ul li i,
+.ratingHead,
+.kb-caption h1 {
+  color: #ff5722 !important;
+}
+
+.common_feature 
+
+.bgVoilet,
+.bg-megenta,
+.submit,
+.navbarbg-megenta,
+nav,
+nav .navbar .links li .sub-menu {
+  background-color: #ff5722 !important;
+}
+.bg-megenta_tr,
+footer,
+.inner_page .sidebar,
+.bg-maroon,
+.btn-danger,
+.search-container button{
+  background-color: #ff5622 !important;
+}
+
+.borderVoilet {
+  border: 2px solid #ff5722 !important;
+}
+.border-warning,
+.podcast-section,
+.important-links,
+.news-section,
+.border-red,
+.btn-danger,
+nav .navbar .links li .sub-menu{
+  border-color: #ff5722 !important;
+}
+body{
+  /* background-color: rgb(178, 200, 248) !important; */
+}
+
+nav .dropdown-menu{
+  background-color: #ff2c00 !important;
+}
+.dropdown-item:focus, .dropdown-item:hover{
+  background-color: #ff5722 !important;
+}
+.event-section{
+  background-color: #ff572287 !important;
+}
+
+.imp-links,
+.bg-secondary,
+.overlay {
+  background-color: #ff5d22ba !important;
+}
+
+.bg-readmore{
+  background-color: rgb(255 61 0 / 11%) !important;
+}
+
+.copyright{
+  background-color: #ff2c00 !important;
+  --bs-bg-opacity: 1;
+}
+
+.event-section div h5,
+.event-section div a,
+footer h5,
+.text-black,
+.links p,
+.useful-links .links i,
+.social-logo i,
+.footer-right p,
+.sidebar ul li a{
+  color:  #fff !important;
+}
+
+.sec_a{
+  color: #000 !important;
+}
+.bg-footer-dark {
+    background: #ff3c00 !important;
+}

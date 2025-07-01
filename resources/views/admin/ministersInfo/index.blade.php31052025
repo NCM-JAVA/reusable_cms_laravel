@@ -1,0 +1,142 @@
+@extends('layouts.master') 
+@section('content') 
+    @section('title', 'Manage Officers')
+    <div class="card">
+        <div class="card-body">
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12 mb-2">
+                        <a style="float: right;" href="{{URL::to('admin/ministers-info/create')}}" class="btn btn-primary pull-right"> Add Minister's Info </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="search-from mb-3">
+
+                                    <form action="#" class="search_inbox" name="form1" id="form1" method="post" accept-charset="utf-8">
+                                
+                                        @csrf
+                                        <div class="form-row">
+
+                                             <!-- Name:  -->
+                                            <div class="form-group">
+                                                <label for="name">Name: </label>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <input onchange="search(this);" class="form-control" type="text" name="name" value="{{Session::get('name')??''}}">
+                                            </div>
+
+                                           <!-- Category:  -->
+                                            <div class="form-group">
+                                                <label for="minister_catg">Category: </label>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select name="minister_catg" id="minister_catg" class="form-control">
+                                                    <option value=""> Select </option>
+                                                    <?php $category = get_ministers_info_type(Session::get('language_id')??1); ?>
+                                                    @foreach($category as $key=>$val)
+                                                        <option value="{{ $key }}" <?php if(Session::get('minister_catg')==$key) echo "selected"; ?>><?php echo $val; ?></option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <!-- Status: -->
+                                            <div class="form-group">
+                                                <label for="Status">Status: </label>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select onchange="search(this);" name="approve_status" id="approve_status" class="form-control">
+                                                <option value=""> Select </option>
+                                                    <?php
+                                                    $statusArray = get_status();
+                                                    foreach($statusArray as $key=>$value) {
+                                                        ?>
+                                                        <option value="<?php echo $key; ?>" <?php if(Session::get('approve_status')==$key) echo "selected"; ?>><?php echo $value; ?></option>
+                                                    <?php  }?>    
+                                                </select>
+                                            </div>
+                                        
+                                            <!-- Language:  -->
+                                            <div class="form-group">
+                                                <label for="language">Language: </label>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <select  onchange="search(this);" name="language_id" id="language_id" class="form-control">
+                                                    <option value="1" @if(Session::get('language_id')==1) selected @endif  >English</option>
+                                                    <option value="2" @if(Session::get('language_id')==2) selected @endif  >Hindi</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="form-group col-md-1">
+                                                <input onchange="search(this);" class="form-control btn btn-success" type="submit" name="search" value="Search">
+                                            </div>
+                                            
+                                        </div> 
+                                    </form>
+                                </div>
+                            </div>
+
+                            @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>{{ $message }}</p>
+                            </div>
+                            @endif
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Minister's Info Type</th>
+                                                <th>Designation </th>
+                                                <th>Status</th>
+                                                <th>Language</th>
+                                                <th width="15%">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if(count($list) > 0)
+                                            <?php
+                                                $count = 1;
+                                                foreach($list as $row):
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $count++; ?></td>
+                                                <td><?php echo $row->name; ?></td>
+                                                <td>{{ ministers_info_type($row->ministers_type, $row->language) }}</td>
+                                                <td>{{ $row->designation }}</td>
+                                                <td><?php echo status($row->txtstatus); ?></td>
+                                                <td><?php echo language($row->language); ?></td>
+                                                <td>
+                                                    <form action="{{ route('ministers-info.destroy',$row->id) }}" method="POST"> 
+                                                        <a class="btn btn-primary" href="{{ route('ministers-info.edit',$row->id) }}">Edit</a>
+                                                        @csrf
+                                                        @method('DELETE')
+
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                                endforeach;
+                                            ?>
+                                            @else
+                                                <tr>
+                                                    <td colspan="7">No Record Found... </td>
+                                                </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                    {!! $list->withQueryString()->links('pagination::bootstrap-5') !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

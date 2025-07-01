@@ -1,0 +1,152 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+RewriteEngine On
+
+# Block Host Header Injection (Rejects unauthorized hosts with 403 Forbidden)
+#RewriteCond %{HTTP_HOST} !^(125\.20\.102\.85|yourdomain\.com|www\.yourdomain\.com)$ [NC]
+#RewriteRule ^ - [F]
+
+# Block direct access to /dca without trailing slash on invalid hosts (Prevents 301 redirect)
+#RewriteCond %{HTTP_HOST} !^(125\.20\.102\.85|yourdomain\.com|www\.yourdomain\.com)$ [NC]
+#RewriteCond %{REQUEST_URI} ^/dca$ [NC]
+#RewriteRule ^ - [F]
+
+# Force Redirect from `/dca` to `/dca/` ONLY for valid hosts
+#RewriteCond %{HTTP_HOST} ^(125\.20\.102\.85|yourdomain\.com|www\.yourdomain\.com)$ [NC]
+#RewriteCond %{REQUEST_URI} ^/dca$ [NC]
+#RewriteRule ^ /dca/ [R=301,L]
+
+    # Force a single valid host
+	RewriteCond %{HTTP_HOST} !^consumeraffairs\.gov\.in$ [NC]
+	RewriteRule ^ - [F]
+
+	# Prevent unwanted 301 redirects (trailing slash issues)
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)/$ /$1 [L,R=302]  # Use 302 instead of 301 (for testing)
+	
+	RewriteCond %{HTTPS} off
+	RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+	# Redirect 301 errors to Laravel's custom route
+	ErrorDocument 403 /errors/301.html
+
+
+	<IfModule mod_headers.c>
+
+    # Prevent clickjacking
+    Header set X-Frame-Options "DENY"
+
+    # Enable cross-site scripting protection
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Referrer Policy
+    Header set Referrer-Policy "no-referrer-when-downgrade"
+
+    # Content Security Policy
+    #Header set Content-Security-Policy "default-src 'self'; script-src 'self' http://125.20.102.85/dca/;
+    #Header set Content-Security-Policy "default-src 'self'; script-src 'self' http://125.20.102.85/dca/;     style-src 'self';"
+	
+	
+    
+    # Strict-Transport-Security (HSTS)
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+   # RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG|OPTIONS|PUT|UPDATE) [NC]
+   # RewriteRule .* - [F,L]
+
+   RewriteCond %{REQUEST_METHOD} ^(DELETE|TRACK|DEBUG|HEAD|TRACE|OPTIONS)$ [NC]
+   RewriteRule .* - [R=405,L]
+
+</IfModule>
+
+	
+
+Options -Indexes
+
+#RequestHeader
+Header append X-FRAME-OPTIONS "Deny"
+RequestHeader unset X-Forwarded-For
+#RequestHeader unset Proxy	
+
+<IfModule mod_headers.c> 
+	Header unset X-Powered-By
+</IfModule> 
+
+
+<IfModule mod_headers.c>
+  Header set X-Frame-Options Deny
+  Header always append X-Frame-Options SAMEORIGIN
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header always append X-Frame-Options SAMEORIGIN
+    Header set X-Content-Type-Options nosniff
+</IfModule>
+
+
+
+<IfModule mod_headers.c>
+  Header always unset Server
+</IfModule>
+
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# X-Frame-Options Header
+Header always set X-Frame-Options "DENY" 
+Header always set Content-Security-Policy "frame-ancestors 'none';"
+
+<FilesMatch "^\..*">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Hide PHP version
+<IfModule mod_headers.c>
+    Header unset X-Powered-By
+    Header unset Server
+</IfModule>
+
+<Files "printenv.pl">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<IfModule mod_headers.c>
+    #Header always edit Set-Cookie ^(.*)$ "$1; HttpOnly; Secure; SameSite=Lax"
+	Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure;SameSite=Lax
+</IfModule>
+
+
+Header always set X-Frame-Options "DENY"
+Header always set Content-Security-Policy "frame-ancestors 'none'"
+
+
+
+
+# Set PHP settings
+php_value upload_max_filesize 50M
+php_value post_max_size 50M
+php_value max_file_uploads 50
+php_value max_execution_time 300
+php_value memory_limit 256M
+
+

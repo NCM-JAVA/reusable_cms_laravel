@@ -1,0 +1,79 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+	
+	<IfModule mod_headers.c>
+
+    # Prevent clickjacking
+    Header set X-Frame-Options "DENY"
+
+    # Enable cross-site scripting protection
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Referrer Policy
+    Header set Referrer-Policy "no-referrer-when-downgrade"
+
+    # Content Security Policy
+    #Header set Content-Security-Policy "default-src 'self'; script-src 'self' http://125.20.102.85/dca/;
+    #Header set Content-Security-Policy "default-src 'self'; script-src 'self' http://125.20.102.85/dca/;     style-src 'self';"
+
+
+
+
+    
+    # Strict-Transport-Security (HSTS)
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+   # RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG|OPTIONS|PUT|UPDATE) [NC]
+   # RewriteRule .* - [F,L]
+
+   RewriteCond %{REQUEST_METHOD} ^(DELETE|TRACK|DEBUG|HEAD|TRACE|OPTIONS)$ [NC]
+   RewriteRule .* - [R=405,L]
+
+</IfModule>
+
+Options -Indexes
+
+#RequestHeader
+Header append X-FRAME-OPTIONS "Deny"
+RequestHeader unset Proxy	
+
+<IfModule mod_headers.c>
+  Header set X-Frame-Options Deny
+  Header always append X-Frame-Options SAMEORIGIN
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header always append X-Frame-Options SAMEORIGIN
+    Header set X-Content-Type-Options nosniff
+</IfModule>
+
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# X-Frame-Options Header
+Header always set X-Frame-Options "DENY"
+
+# Set PHP settings
+php_value upload_max_filesize 50M
+php_value post_max_size 50M
+php_value max_file_uploads 50
+php_value max_execution_time 300
+php_value memory_limit 256M

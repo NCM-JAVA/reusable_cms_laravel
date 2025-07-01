@@ -1,0 +1,48 @@
+.container-fluid{
+    max-width: 1750px;
+ }
+ .px-5{
+    padding-left: 5rem;
+    padding-right: 5rem;
+ }
+ /* .gap-2{
+    gap:2rem;
+ } */
+
+ @media print{
+   .navbar{
+      display:none;
+   }
+   .sidebar{
+      display:none;
+   }
+   .header_top{
+      display: none;
+   }
+   .breadcrumb .before_disable{
+      display: none;
+   }
+   .footer_links{
+      display: none;
+   }
+   .footer_mid{
+      padding-top: 10px;
+   }
+   .banner_carousel{
+      display: none !important;
+   }
+   .minister_image_slider{
+      display: none !important;
+   }
+ }
+
+ .inner_page table{
+   box-shadow: 1px 8px 10px #afafaf;
+
+ }
+ .inner_page table thead {
+   background-color: #fbe4d5;
+ }
+ /* .inner_page table tbody td a {
+   color: blue !important;
+ } */

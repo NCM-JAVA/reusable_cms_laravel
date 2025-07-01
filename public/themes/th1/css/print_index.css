@@ -1,0 +1,111 @@
+@media print{
+a[href]:after {
+	content: none !important;
+}
+html, div{
+	box-sizing: border-box;
+}
+img{
+	max-width:100% !important;
+}
+.col-md-1 {
+    width: 8.33333333% !important;
+}.col-md-2 {
+    width: 16.66666667% !important;
+}.col-md-3 {
+    width: 25% !important;
+}.col-md-4 {
+    width: 33.33333333% !important;
+}.col-md-5 {
+    width: 41.66666667% !important;
+}.col-md-6 {
+    width: 50% !important;
+}.col-md-7 {
+	width: 58.33333333% !important;
+}.col-md-8 {
+    width: 66.66666667% !important;
+}.col-md-9 {
+    width: 75% !important;
+}.col-md-10 {
+	width: 83.33333333% !important;
+}.col-md-11 {
+    width: 91.66666667% !important;
+}.col-md-12 {
+    width: 100% !important;
+}
+.col-sm-1 {
+    width: 8.33333333% !important;
+}.col-sm-2 {
+    width: 16.66666667% !important;
+}.col-sm-3 {
+    width: 25% !important;
+}.col-sm-4 {
+    width: 33.33333333% !important;
+}.col-sm-5 {
+    width: 41.66666667% !important;
+}.col-sm-6 {
+    width: 50% !important;
+}.col-sm-7 {
+	width: 58.33333333% !important;
+}.col-sm-8 {
+    width: 66.66666667% !important;
+}.col-sm-9 {
+    width: 75% !important;
+}.col-sm-10 {
+	width: 83.33333333% !important;
+}.col-sm-11 {
+    width: 91.66666667% !important;
+}.col-sm-12 {
+    width: 100% !important;
+}
+
+.sf-menu li, .footer_top ul li{
+	float:left;
+	display:inline-block;
+	white-space:normal;
+	width:auto;
+}
+.sf-menu li a{
+	float:left;
+	display:inline-block;
+	white-space:normal;
+}
+.heading_tender, .key_people_name{
+	font-size: 100%;
+}
+.key_people_designation{
+	font-size: 80%;
+}
+.sf-arrows .sf-with-ul, .sf-menu li a{
+	padding:0px !important
+}
+.key_people{
+	padding-bottom:0 !important;
+}
+.key_people img{
+	max-width:40px !important;
+}
+.header_mid{
+	padding-bottom:0 !important;
+}
+
+@media (max-width: 768px) and (min-width: 360px){
+.mt30, .sear{
+	margin: 0px !important;
+}
+.hidden-xs{
+	display:inline !important;
+}
+}
+@media (max-width: 767px){
+#access .hidden-xs, .common_feature .hidden-xs {
+    display: block!important;
+}
+}
+}
+.services ul .list-group-item img {
+    max-width: 50px;
+    background: #0376cb;
+    padding: 5px;
+    border-radius: 50%;
+}

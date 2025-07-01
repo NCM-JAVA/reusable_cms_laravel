@@ -1,0 +1,202 @@
+@extends('layouts.master')
+@section('content')
+@section('title', 'Edit Banner')
+
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+            <div class="card-body"> 
+                    @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                    @endif 
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form  action="{{ route('banner.update' , $data->id) }}" name="form1" id="form1" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                @csrf
+                    @method('PUT')
+                   
+                    <div class="panel-body">
+						
+					<div class="row">
+						<div class="col-12 col-md-3 col-lg-3">
+							<div class="form-group">
+								<label>Page Language:</label>
+								<span class="star">*</span>
+							</div>
+						</div>
+						<div class="col-12 col-md-6 col-lg-6">
+                                <div class="input_class form-group">
+                                    <input type="radio" name="language" autocomplete="off" id="txtlanguage" onclick="getPage(this.value);" value="1"  @if((!empty($data->language)?$data->language:old('language'))==1) checked @endif class="@error('language') is-invalid @enderror" />English &nbsp;
+                                    <input type="radio" name="language" autocomplete="off" id="txtlanguage" onclick="getPage(this.value);" value="2"  @if((!empty($data->language)?$data->language:old('language'))==2) checked @endif class="@error('language') is-invalid @enderror"  />Hindi &nbsp;
+                                    @if($errors->has('language'))
+                                    <p class="text-danger">{{ $errors->first('language') }}</p>
+                                    @endif
+                                </div>
+						</div>
+					</div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-3 col-lg-3">
+                            <div class="form-group">
+                                <label> Type:</label>
+                                <span class="star">*</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <select name="txttype" class="input_class form-control" id="txttype" autocomplete="off" onchange="showBannerNote(this)">
+                                    <option value=""> Select Type </option>
+                                    <option value="1" {{ (old('txttype', $data->txttype ?? '') == '1') ? 'selected' : '' }}>Banner</option>
+                                    <option value="2" {{ (old('txttype', $data->txttype ?? '') == '2') ? 'selected' : '' }}>Poster</option>
+                                </select>
+                                @if($errors->has('txttype'))
+                                <span class="text-danger">{{ $errors->first('txttype') }}</span> @endif
+                            
+                            </div>
+                        </div>
+                    </div>
+                    
+                        <div class="row">
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label>Menu Title:</label>
+                                    <span class="star">*</span>
+									<label class="text-info">Allowed Apecial Characters -,()'"/&.</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-6">
+                               <div class="form-group">
+                                    <input name="menu_title" maxlength="256"
+                                    minlength="2" 
+									autocomplete="off" type="text" onkeypress="return onlyAlphabets(event,this);"
+                                    class="input_class form-control  @error('menu_title') is-invalid @enderror" id="menu_title"   value="{{ !empty($data->title)?$data->title:old('menu_title')}}"  />
+                                    @error('menu_title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label>Banner Link:</label>
+                                    <span class="star"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-6">
+                               <div class="form-group">
+                                    <input name="banner_link" maxlength="256"
+                                    minlength="2"  autocomplete="off" type="text" placeholder="Enter external link"
+                                    class="input_class form-control  @error('banner_link') is-invalid @enderror" id="banner_link"   value="{{ !empty($data->banner_link)?$data->banner_link:old('banner_link')}}"  />
+                                    @if($errors->has('banner_link'))
+                                    <p class="text-danger">{{ $errors->first('banner_link') }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                       
+                       
+                            
+                        <div class="row" id="txtPDF" >
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label>Image Upload:</label>
+                                    <span class="star">*</span>
+									<div id="bannerNote" class="text-info mt-2" style="display:none;">
+										Note: Recommended banner size is 1350 × 330 pixels.
+									</div>
+									<div id="posterNote" class="text-info mt-2" style="display:none;">
+										Note: Recommended poster size is 542 × 386 pixels.
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <input type="file" name="txtuplode" class="input_class  @error('txtuplode') is-invalid @enderror  inline-block" id="txtuplode" />
+                                    @if($errors->has('txtuplode'))
+                                    <p class="text-danger">{{ $errors->first('txtuplode') }}</p>
+                                    @endif
+								</div>
+                                @if(!empty($data->txtuplode))
+                                <img style="margin-bottom: 5%;" class="w-50 img-responsive" alt="image" id="logoimg" src="{{ URL::asset('public/upload/admin/cmsfiles/banner/thumbnail/')}}/{{$data->txtuplode}}" class="rounded-circle mr-1" />
+                              
+                                @endif
+                                <input type="hidden" name="oldimg" value="{{ !empty($data->txtuplode)?$data->txtuplode:''}}" >
+                            </div>
+                        </div>
+						<div class="row">
+                            <div class="col-12 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <label> Status:</label>
+                                    <span class="star">*</span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                <select name="txtstatus" class="input_class form-control" id="txtstatus" autocomplete="off">
+                                    <option value=""> Select </option>
+                                        <?php
+                                         $user_type = Auth()->user()->user_type;
+                                         $statusArray = get_status($user_type);
+                                        foreach($statusArray as $key=>$value) {
+                                            ?>
+                                            <option value="<?php echo $key; ?>" <?php if((!empty($data->txtstatus)?$data->txtstatus:old('txtstatus'))==$key) echo "selected"; ?>><?php echo $value; ?></option>
+                                        <?php  }?>
+                                </select>
+                                  @if($errors->has('txtstatus'))
+                                    <p class="text-danger">{{ $errors->first('txtstatus') }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-xm-12">
+                                <div class="pull-right">
+                               
+                                    <input name="cmdsubmit" type="submit" class="btn btn-success" id="cmdsubmit" value="Submit" />&nbsp;
+                                    <a href="{{URL::to('admin/banner/')}}" class="btn btn-primary" >back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </form>
+               
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showBannerNote(select) {
+        const bannerNote = document.getElementById('bannerNote');
+        const posterNote = document.getElementById('posterNote');
+        if (select.value == '1') {
+            bannerNote.style.display = 'block';
+            posterNote.style.display = 'none';
+        } else {
+            bannerNote.style.display = 'none';
+            posterNote.style.display = 'block';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        showBannerNote(document.getElementById('txttype'));
+    });
+</script>
+
+@endsection

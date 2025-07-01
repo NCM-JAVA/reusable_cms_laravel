@@ -1,0 +1,192 @@
+/**
+ *
+ * You can write your CSS code here, DO NOT touch the default JavaScript file
+ * because it will make it harder for you to update.
+ * 
+ */
+
+
+.search-from form .form-row{
+    display: flex;
+}
+.panel-body table thead tr{
+    background-color: #fbe4d5;
+}
+.panel-body table {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+}
+.bg-maroon {
+    background-color: #C00404;
+    color: #fff;
+}
+.card-body form .panel-body{
+    row-gap: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.card-body .search-from .form-row{
+gap: 10px;
+}
+
+
+
+
+/* dashboard data numbers  */
+
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* padding: 20px; */
+    /* max-width: 1400px; */
+    margin: 0 auto;
+}
+
+.stat-card {
+    flex: 1;
+    min-width: 280px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-title {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.stat-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.received-card { background: linear-gradient(to right, #ffffff, #f0f7ff); }
+.approved-card { background: linear-gradient(to right, #ffffff, #f0fff0); }
+.rejected-card { background: linear-gradient(to right, #ffffff, #fff0f0); }
+.pending-card { background: linear-gradient(to right, #ffffff, #fffff0); }
+
+
+
+
+
+
+/* dashboard quick links  */
+
+.quick-links-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    /* max-width: 1400px; */
+    margin: 20px auto;
+}
+
+.quick-btn {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .quick-links-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .quick-links-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .quick-links-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .quick-btn {
+        height: 100px; /* Maintain height even on mobile */
+    }
+}
+
+
+.quick-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(to right, #ffffff, #f8f9ff);
+}
+
+.quick-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f6fa;
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.quick-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.quick-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    flex: 1;
+}
+
+
+/* Active State */
+.quick-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Focus State for Accessibility */
+.quick-btn:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+
+
+
+
+
+/*# sourceMappingURL=custom.css.map */

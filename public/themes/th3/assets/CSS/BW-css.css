@@ -1,0 +1,152 @@
+
+.swiper-navBtn {
+  padding: 10px;
+  margin: 10px;
+  background-color: #000;
+  transition: color 0.3s ease;
+}
+.colorVoilet {
+  color: #000 !important;
+}
+
+.bgVoilet,
+.left-section .bg-white {
+  background-color: #000 !important;
+}
+
+.borderVoilet {
+  border: 2px solid #000 !important;
+}
+.website_logo img,
+.header_img img{
+  filter: invert(1) !important;
+}
+.viewall {
+  padding-left: 50px;
+  padding-right: 30px;
+}
+
+.bg-megenta_tr,
+.news-section,
+.search-container button
+{
+  background-color: #212121a9;
+}
+
+.kb-caption h1,
+.bg-megenta,
+.event-section,
+.bg_gray,
+.bg-white,
+.card,
+.navbarbg-megenta,
+.productRating,
+footer,
+.dropdown-item:focus,
+ .dropdown-item:hover,
+nav,
+.podcast-section h5,
+.important-links h5,
+.about_detail.bg-white,	
+.gallery-section .bg-white,
+.brand-logo.bg-white,
+footer,
+.links .sub-menu li:hover
+{
+  background-color: #212121 !important;
+}
+.overlay,
+.bg-maroon,
+.btn-danger,
+.bg-footer-dark,
+nav .navbar .links li .sub-menu
+{
+  background: #000 !important;
+}
+body,
+.imp-links,
+.holder,
+.bg-secondary,
+.bg-readmore,
+.bg_black,
+.submit,
+nav .dropdown-menu,
+.bg-black,
+.table_whoswho tr td,
+.inner_page_start table tr td,
+.sidebar{
+  background-color: #000 !important;
+}
+
+.holder ul li i{
+  color: #212121 !important;
+}
+
+a, li, p, h1, h2, h3, h4, h5, h6,
+.holder ul li a,
+.text-dark, .text-dark a
+.viewall,
+.right_up_arrow,
+.text-black,
+.form-control,
+.form-control:focus,
+.form-control:focus,
+.submit,
+nav .navbar .links li a,
+.heading h4,
+.sitemap .has-sub a,
+.table_whoswho tr td,
+.sidebar ul li a,
+td, th {
+  color: rgb(255, 221, 0) !important;
+}
+
+tr:nth-child(even){
+	background-color: #1d1d1d !important;
+}
+td:has(> a:first-child + img:last-child) > a {
+  filter: invert(1)
+}
+
+.read_more,
+.arrow_icon,
+.card-title,
+.colorVoilet,
+.social-logo i,
+.useful-links .links i,
+.form_lable,
+.news-section .text-dark{
+  color: #fff !important;
+}
+.inner_page table thead, tbody tr th, .tble_whoswho thead{
+	background-color: #3e3e3e !important
+}
+
+img{
+  filter: grayscale() ;
+}
+.footer_logo{
+  filter: invert(1) !important;
+}
+
+.border-bottom,
+.card,
+.border,
+.podcast-section, .important-links,
+.news-section,
+.btn-danger,
+.border-red,
+nav .navbar .links li .sub-menu {
+  border-color: #343434 !important;
+}
+.navbar{
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.sitemap .has-sub a {
+  color: ;
+}
+.link-invert a{
+	filter: invert(1);
+}
