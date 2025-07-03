@@ -7,7 +7,8 @@
    $themes=!empty(get_setting($langid)->themes)?get_setting($langid)->themes:'';
    @endphp
    <head>
-   @include("../themes.{$themes}.includes.head")
+   @include("../themes.includes.head")
+   <!-- include("../themes.{$themes}.includes.head") -->
 
   </head>
   
